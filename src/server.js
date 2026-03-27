@@ -21,6 +21,7 @@ const analyticsRoutes = require('./routes/analyticsRoutes');
 const cronRoutes = require('./routes/cronRoutes');
 
 const app = express();
+app.set('trust proxy', 1);
 
 // ─── STRIPE WEBHOOK — must be before json middleware ──────────────────────────
 // (The raw body parser is applied inside subscriptionRoutes)
