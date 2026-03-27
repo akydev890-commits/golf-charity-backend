@@ -32,19 +32,7 @@ app.use(helmet({
 }));
 
 app.use(cors({
-  origin: (origin, callback) => {
-    if (!origin) return callback(null, true); // allow Postman / curl
-
-    // allow all vercel frontend deployments
-    if (
-      origin.endsWith('.vercel.app') ||
-      origin.includes('localhost')
-    ) {
-      return callback(null, true);
-    }
-
-    return callback(new Error('Not allowed by CORS'));
-  },
+  origin: process.env.CLIENT_URL || 'http://localhost:3000',
   credentials: true,
   methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'stripe-signature'],
